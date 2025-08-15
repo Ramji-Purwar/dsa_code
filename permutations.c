@@ -10,11 +10,11 @@
 #include <limits.h>
 #include <ctype.h>
 
-// void swap(int *a, int *b){
-//     int temp = *a;
-//     *a = *b;
-//     *b = temp;
-// }
+void swap(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 void permutations(int *arr, int n, int *b, int k, int cur){
     if(cur == k){
