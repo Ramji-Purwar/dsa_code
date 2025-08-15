@@ -10,6 +10,12 @@
 #include <limits.h>
 #include <ctype.h>
 
+// void swap(int *a, int *b){
+//     int temp = *a;
+//     *a = *b;
+//     *b = temp;
+// }
+
 void permutations(int *arr, int n, int *b, int k, int cur){
     if(cur == k){
         for(int i = 0; i < k; i++){
@@ -19,7 +25,7 @@ void permutations(int *arr, int n, int *b, int k, int cur){
     }
     for(int i = 0; i < n; i++){
         swap(&arr[0], &arr[i]);
-        b[k] = arr[0];
+        b[cur] = arr[0];
         permutations(arr + 1, n - 1, b, k, cur + 1);
         swap(&arr[0], &arr[i]);
     }
