@@ -16,6 +16,18 @@ void swap(int *a, int *b){
     *b = temp;
 }
 
+void sort(int *begin, int *end) {
+    for (int *i = begin; i < end - 1; i++) {
+        for (int *j = i + 1; j < end; j++) {
+            if (*i > *j) {
+                int temp = *i;
+                *i = *j;
+                *j = temp;
+            }
+        }
+    }
+}
+
 void permutations(int *arr, int n, int *b, int k, int cur){
     if(cur == k){
         for(int i = 0; i < k; i++){
@@ -26,6 +38,7 @@ void permutations(int *arr, int n, int *b, int k, int cur){
     for(int i = 0; i < n; i++){
         swap(&arr[0], &arr[i]);
         b[cur] = arr[0];
+        sort(arr + 1, arr + n);
         permutations(arr + 1, n - 1, b, k, cur + 1);
         swap(&arr[0], &arr[i]);
     }
