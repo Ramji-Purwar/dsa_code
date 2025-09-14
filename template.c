@@ -25,7 +25,7 @@
 #define scanLL2(a, b)     scanf("%lld %lld", &(a), &(b))
 #define scanLL3(a, b, c)  scanf("%lld %lld %lld", &(a), &(b), &(c))
 
-// ================= VECTOR TEMPLATE ==================
+// ================= VECTOR TEMPLATE =================
 
 typedef struct { int *data; int size; int capacity; } Vector;
 #define vectorInit(v)    do { (v).data = NULL; (v).size = 0; (v).capacity = 0; } while(0)
@@ -44,7 +44,7 @@ static inline void __vectorPopBack(Vector *v) { if (v->size > 0) v->size--; }
 #define vectorPushBack(v, x)   __vectorPushBack(&(v), (x))
 #define vectorPopBack(v)       __vectorPopBack(&(v))
 
-// ================= VECTOR OF VECTORS ==================
+// ================= VECTOR OF VECTORS =================
 
 typedef struct { Vector *data; int size; int capacity; } VectorVec;
 #define vectorVecInit(vv)   do { (vv).data = NULL; (vv).size = 0; (vv).capacity = 0; } while(0)
@@ -59,7 +59,7 @@ static inline void __vectorVecPushBack(VectorVec *vv, Vector value) { \
 }
 #define vectorVecPushBack(vv, x)   __vectorVecPushBack(&(vv),(x))
 
-// ================= SORTING FUNCTIONS ==================
+// ================= SORTING FUNCTIONS =================
 
 static inline int compare_asc(const void *a, const void *b) {
     int ia = *(const int*)a;
@@ -76,7 +76,7 @@ static inline int compare_desc(const void *a, const void *b) {
 #define vectorSort(v)      qsort((v).data, (v).size, sizeof(int), compare_asc)
 #define vectorSortDesc(v)  qsort((v).data, (v).size, sizeof(int), compare_desc)
 
-// ================= VECTOR UTILITY FUNCTIONS ==================
+// ================= VECTOR UTILITY FUNCTIONS =================
 
 void vectorClear(Vector *v) {
     v->size = 0;
@@ -104,7 +104,7 @@ void vectorResize(Vector *v, int new_size, int default_value) {
     v->size = new_size;
 }
 
-// ================= VECTORVEC UTILITY FUNCTIONS ==================
+// ================= VECTORVEC UTILITY FUNCTIONS =================
 
 void vectorVecClear(VectorVec *vv) {
     vv->size = 0;
@@ -137,7 +137,7 @@ void vectorVecResize(VectorVec *vv, int new_size) {
     vv->size = new_size;
 }
 
-// ================== QUEUE ==================
+// ================= QUEUE =================
 
 typedef struct { int *data; int front; int rear; int size; int capacity; } Queue;
 
@@ -184,7 +184,7 @@ static inline int __queuePop(Queue *q) {
 #define queuePush(q, x)    __queuePush(&(q), (x))
 #define queuePop(q)        __queuePop(&(q))
 
-// ================= QUEUE UTILITY FUNCTIONS ==================
+// ================= QUEUE UTILITY FUNCTIONS =================
 
 void queueClear(Queue *q) {
     q->front = 0;
@@ -203,7 +203,7 @@ void queueDestroy(Queue *q) {
     q->capacity = 0;
 }
 
-// ================== GRAPH UTILITY FUNCTION ==================
+// ================= GRAPH UTILITY FUNCTION =================
 
 void addEdge(VectorVec *adj, int u, int v) {
     vectorPushBack(vectorVecAt(*adj, u), v);
@@ -250,7 +250,7 @@ void bfs(VectorVec *adj, int st){
     queueDestroy(&q);
 }
 
-// ================= MAIN SOLUTION ==================
+// ================= MAIN SOLUTION =================
 
 void testcase(){
     
