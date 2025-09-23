@@ -29,13 +29,21 @@ int main(){
     for(int i = 0; i < n; i++){
         scanf("%d", &arr[i]);
     }
-    int l = 1, r = n;
-    while(r - l > 1){
-        int m = (r + l) / 2;
-        if(check(m)) r = m;
-        else l = m - 1;
+    int l = 0, r = 0;
+    for(int i = 0; i < n; i++){
+        if(arr[i] > l) l = arr[i];
+        r += arr[i];
     }
-    if(check(l)) printf("%d\n", l);
-    else printf("%d\n", r);
+    int ans = r;
+    while(l <= r){
+        int m = l + (r - l) / 2;
+        if(check(m, d, arr, n)){
+            ans = m;
+            r = m - 1;
+        } else {
+            l = m + 1;
+        }
+    }
+    printf("%d\n", ans);
     return 0;
 }
