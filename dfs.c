@@ -57,7 +57,6 @@ void addEdge(struct Graph *graph, int u, int v){
 void dfs(struct Graph *graph, int v){
     struct Node *child = graph -> adjList[v];
     graph -> visited[v]  = true;
-    printf("%d ", v);
     while(child != NULL){
         int el = child -> val;
         if(graph -> visited[el] == false){
