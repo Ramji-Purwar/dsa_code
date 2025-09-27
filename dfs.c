@@ -16,18 +16,18 @@ struct Node{
     struct Node *next;
 };
 
+struct Node* createNode(int x){
+    struct Node *newNode = malloc(sizeof(struct Node));
+    newNode -> val = x;
+    newNode -> next = NULL;
+    return newNode;
+}
+
 struct Graph{
     int N;
     struct Node **adjList;
     bool *visited;
 };
-
-struct Node* createNode(int val){
-    struct Node *newNode = malloc(sizeof(struct Node));
-    newNode -> val = val;
-    newNode -> next = NULL;
-    return newNode;
-}
 
 struct Graph* createGraph(int n){
     struct Graph *graph = malloc(sizeof(struct Graph));
