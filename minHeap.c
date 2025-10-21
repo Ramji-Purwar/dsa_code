@@ -21,17 +21,17 @@ minHeap* cMinHeap(int n){
     return h;
 }
 
-void swap(pair* a, pair* b){
+void pair_swap(pair* a, pair* b){
     pair temp = *a;
     *a = *b;
     *b = temp;
 }
 
-void heapifyUp(minHeap* h, int idx){
+void heapifyMinUp(minHeap* h, int idx){
     while(idx > 0){
         int parent = (idx - 1) / 2;
         if(h->arr[idx].fi < h->arr[parent].fi){
-            swap(&h->arr[idx], &h->arr[parent]);
+            pair_swap(&h->arr[idx], &h->arr[parent]);
             idx = parent;
         } else {
             break;
@@ -39,7 +39,7 @@ void heapifyUp(minHeap* h, int idx){
     }
 }
 
-void heapifyDown(minHeap* h, int idx){
+void heapifyMinDown(minHeap* h, int idx){
     int smallest = idx;
     int left = 2 * idx + 1;
     int right = 2 * idx + 2;
@@ -52,33 +52,33 @@ void heapifyDown(minHeap* h, int idx){
     }
     
     if(smallest != idx){
-        swap(&h-> arr[idx], &h-> arr[smallest]);
-        heapifyDown(h, smallest);
+        pair_swap(&h-> arr[idx], &h-> arr[smallest]);
+        heapifyMinDown(h, smallest);
     }
 }
 
-void push(minHeap* h, int dist, int vertex){
+void hPush(minHeap* h, int dist, int vertex){
     if(h-> size >= h-> n) return;
     
     h-> arr[h-> size].fi = dist;
     h-> arr[h-> size].se = vertex;
-    heapifyUp(h, h-> size);
+    heapifyMinUp(h, h-> size);
     h-> size++;
 }
 
-pair pop(minHeap* h){
+pair hPop(minHeap* h){
     pair result = h-> arr[0];
     h-> size--;
     h-> arr[0] = h->arr[h->size];
-    heapifyDown(h, 0);
+    heapifyMinDown(h, 0);
     return result;
 }
 
-bool isEmpty(minHeap* h){
+bool hEmpty(minHeap* h){
     return h->size == 0;
 }
 
 int main(){
-    
+
     return 0;
 }
