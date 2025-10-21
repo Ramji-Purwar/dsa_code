@@ -63,17 +63,17 @@ void addEdge(graph* g, int u, int v){
 int cnt = 0;
 
 void dfs(graph* g, int v, int p){
-    g-> d[v] = g-> l[v] = cnt;
+    g-> d[v] = g-> l[v] = cnt++;
     node* ch = g-> aj[v];
-    int degree = 0;
+    int children = 0;
     while(ch != NULL){
         int el = ch-> val;
         if(el != p){
             if(g-> d[el] == -1){
+                children++;
                 dfs(g, el, v);
                 g->l[v] = min(g->l[v], g->l[el]);
-                if(g-> l[el] >= g-> l[v] && p != -1) g-> mark[v] = true;
-                degree++;
+                if(g-> l[el] >= g-> d[v] && p != -1) g-> mark[v] = true;
             }
             else{
                 g-> l[v] = min(g->l[v], g->d[el]);
@@ -81,7 +81,7 @@ void dfs(graph* g, int v, int p){
         }
         ch = ch-> next;
     }
-    if(p == -1 && degree > 1) g-> mark[v] = true;
+    if(p == -1 && children > 1) g-> mark[v] = true;
 }
 
 int main(){
