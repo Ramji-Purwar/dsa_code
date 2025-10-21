@@ -99,6 +99,8 @@ node* cnode(int x, int wt){
     return new; 
 }
 
+///////////////////////////////////////////////////////////
+
 typedef struct Graph{
     int n;
     node** aj;
@@ -132,6 +134,8 @@ void addEdge(graph* g, int u, int v, int wt){
     g->aj[v] = new;
 }
 
+//////////////////////////////////////////////////////////////
+
 void dijkstra(graph* g, int src){
     minHeap* pq = cMinHeap(g->n * 100);
    
@@ -159,6 +163,8 @@ void dijkstra(graph* g, int src){
         }
     }
 }
+
+//////////////////////////////////////////////////////////////////
 
 int main(){
     int n, m;
