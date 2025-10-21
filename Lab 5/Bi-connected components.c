@@ -88,7 +88,7 @@ int main(){
     REP(i, 0, m){
         int u, v;
         scanf("%d %d", &u, &v);
-        addEdge(g, u, v);
+        addEdge(g, u-1, v-1);
     }
 
     g->d[0] = g->l[0] = 0;

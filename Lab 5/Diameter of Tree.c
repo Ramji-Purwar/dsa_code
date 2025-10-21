@@ -63,7 +63,7 @@ int main(){
     REP(i, 1, n){
         int u, v;
         scanf("%d %d", &u, &v);
-        addEdge(g, u, v);
+        addEdge(g, u-1, v-1);
     }
     
     g-> d[0] = 0;
@@ -79,6 +79,6 @@ int main(){
     REP(i, 0, n)
         if(g-> d[i] > dia) dia = g-> d[i];
 
-    printf("%d\n", dia);
+    printf("%d\n", dia+1);
     return 0;
 }

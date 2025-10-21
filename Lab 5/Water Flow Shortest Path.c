@@ -120,7 +120,7 @@ int main(){
         ans = min(ans, d[i][0]);
         ans = min(ans, d[i][m-1]);
     }
-    if(ans == 1e9) ans = -1;
-    printf("%d", ans);
+    if(ans == 1e9) ans = -2;
+    printf("%d", ans+1);
     return 0;
 }
