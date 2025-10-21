@@ -1,1 +1,0 @@
-{"name":"Local: Bi-connected components","url":"/workspaces/dsa_code/Lab 5/Bi-connected components.c","tests":[{"id":1761063702170,"input":"10 5\n3 4\n7 10\n1 4\n4 5\n2 8\n","output":"3\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/workspaces/dsa_code/Lab 5/Bi-connected components.c","group":"local","local":true}
