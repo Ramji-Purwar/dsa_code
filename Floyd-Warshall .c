@@ -10,11 +10,11 @@ ll min_ll(ll a, ll b){
     return a > b ? b : a;
 }
 
-int n;
+int n, m;
 ll** dist;
 
 int main(){
-    scanf("%d", &n);
+    scanf("%d %d", &n, &m);
     dist = malloc(n * sizeof(ll*));
     REP(i, 0, n){
         dist[i] = malloc(n * sizeof(ll));
@@ -24,11 +24,11 @@ int main(){
         }
     }
 
-    REP(i, 0, n){
+    REP(i, 0, m){
         int u, v;
         ll wt;
         scanf("%d %d %lld", &u, &v, &wt);
-        dist[u][v] = wt;
+        dist[u][v] = min_ll(dist[u][v], wt);
     }
 
     REP(k, 0, n){
