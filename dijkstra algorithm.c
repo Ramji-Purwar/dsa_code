@@ -195,7 +195,7 @@ void dijkstra(graph* g, int src){
 int main(){
     int n, m;
     scanf("%d %d", &n, &m);
-    graph* g = cgraph(n + 1);
+    graph* g = cgraph(n);
     REP(i, 0, m){
         int x, y;
         ll wt;
@@ -203,23 +203,5 @@ int main(){
         addEdge(g, x, y, wt);
     }
 
-
-
-    if(g){
-        for(int i = 0; i <= n; i++){
-            node* it = g->aj[i];
-            while(it){
-                node* tmp = it->next;
-                free(it);
-                it = tmp;
-            }
-        }
-        free(g->aj);
-        free(g->vis);
-        free(g->dist);
-        free(g->p);
-        free(g);
-    }
-    
     return 0;
 }
