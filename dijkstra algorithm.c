@@ -110,9 +110,9 @@ typedef struct Node{
 
 node* cnode(ll x, ll wt){
     node* new = malloc(sizeof(node));
-    new->val = x;
-    new->wt = wt;
-    new->next = NULL;
+    new-> val = x;
+    new-> wt = wt;
+    new-> next = NULL;
     return new; 
 }
 
@@ -129,74 +129,74 @@ typedef struct Graph{
 graph* cgraph(int n){
     graph* g = malloc(sizeof(graph));
     
-    g->n = n;
-    g->aj = malloc(n * sizeof(node*));
-    g->vis = malloc(n * sizeof(int));
-    g->dist = malloc(n * sizeof(ll));
-    g->p = malloc(n * sizeof(int));
+    g-> n = n;
+    g-> aj = malloc(n * sizeof(node*));
+    g-> vis = malloc(n * sizeof(int));
+    g-> dist = malloc(n * sizeof(ll));
+    g-> p = malloc(n * sizeof(int));
     
     REP(i, 0, n){
-        g->aj[i] = NULL;
-        g->vis[i] = 0;
-        g->dist[i] = INF;
-        g->p[i] = -1;
+        g-> aj[i] = NULL;
+        g-> vis[i] = 0;
+        g-> dist[i] = INF;
+        g-> p[i] = -1;
     }
     return g;
 }
 
 void freeGraph(graph* g){
-    for(int i = 0; i < g->n; i++){
-        node* it = g->aj[i];
+    for(int i = 0; i < g-> n; i++){
+        node* it = g-> aj[i];
         while(it){
-            node* tmp = it->next;
+            node* tmp = it-> next;
             free(it);
             it = tmp;
         }
     }
-    free(g->aj);
-    free(g->vis);
-    free(g->dist);
-    free(g->p);
+    free(g-> aj);
+    free(g-> vis);
+    free(g-> dist);
+    free(g-> p);
     free(g);
 }
 
 void addEdge(graph* g, int u, int v, ll wt){
     node* new = cnode(v, wt);
-    new->next = g->aj[u];
-    g->aj[u] = new;
+    new-> next = g-> aj[u];
+    g-> aj[u] = new;
     
     new = cnode(u, wt);
-    new->next = g->aj[v];
-    g->aj[v] = new;
+    new-> next = g-> aj[v];
+    g-> aj[v] = new;
 }
 
 //////////////////////////////////////////////////////////////
 
 void dijkstra(graph* g, int src){
-    minHeap* pq = cMinHeap(g->n * 10);
+    minHeap* pq = cMinHeap(g-> n * 10);
    
     hPush(pq, 0, src);
-    g->dist[src] = 0;
+    g-> dist[src] = 0;
 
     while(!hEmpty(pq)){
         pair cur = hPop(pq);
         ll d = cur.fi;
         int v = cur.se;
         
-        if(g->vis[v]) continue;
-        g->vis[v] = 1;
+        if(g-> vis[v]) continue;
+        g-> vis[v] = 1;
         
-        node* ch = g->aj[v];
+        node* ch = g-> aj[v];
         while(ch != NULL){
-            int el = ch->val;
-            ll wt = ch->wt;
+            int el = ch-> val;
+            ll wt = ch-> wt;
             
-            if(!g->vis[el] && g->dist[v] + wt < g->dist[el]){
-                g->dist[el] = g->dist[v] + wt;
-                g->p[el] = v;
-                hPush(pq, g->dist[el], el);
+            if(!g-> vis[el] && g-> dist[v] + wt < g-> dist[el]){
+                g-> dist[el] = g-> dist[v] + wt;
+                g-> p[el] = v;
+                hPush(pq, g-> dist[el], el);
             }
-            ch = ch->next;
+            ch = ch-> next;
         }
     }
 
