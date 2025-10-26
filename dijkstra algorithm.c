@@ -144,6 +144,22 @@ graph* cgraph(int n){
     return g;
 }
 
+void freeGraph(graph* g){
+    for(int i = 0; i < g->n; i++){
+        node* it = g->aj[i];
+        while(it){
+            node* tmp = it->next;
+            free(it);
+            it = tmp;
+        }
+    }
+    free(g->aj);
+    free(g->vis);
+    free(g->dist);
+    free(g->p);
+    free(g);
+}
+
 void addEdge(graph* g, int u, int v, ll wt){
     node* new = cnode(v, wt);
     new->next = g->aj[u];
@@ -184,10 +200,7 @@ void dijkstra(graph* g, int src){
         }
     }
 
-    if(pq){
-        if(pq->arr) free(pq->arr);
-        free(pq);
-    }
+    freeHeap(pq);
 }
 
 //////////////////////////////////////////////////////////////////
@@ -203,5 +216,6 @@ int main(){
         addEdge(g, x, y, wt);
     }
 
+    freeGraph(g);
     return 0;
 }
