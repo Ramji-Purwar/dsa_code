@@ -4,18 +4,16 @@
 #include <limits.h>
 #define REP(i, a, b) for(int i = a; i < b; i++)
 #define ll long long
-const int INF = INT_MAX;
+const ll INF = LLONG_MAX / 2;
 
 ll min_ll(ll a, ll b){
     return a > b ? b : a;
 }
 
-int n, m;
-ll** dist;
-
 int main(){
+    int n, m;
     scanf("%d %d", &n, &m);
-    dist = malloc(n * sizeof(ll*));
+    ll** dist = malloc(n * sizeof(ll*));
     REP(i, 0, n){
         dist[i] = malloc(n * sizeof(ll));
         REP(j, 0, n){
@@ -38,5 +36,9 @@ int main(){
             }
         }
     }
+
+    REP(i, 0, n) free(dist[i]);
+    free(dist);
+
     return 0;
 }
