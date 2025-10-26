@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define ll long long
 
 #define MAX_LAST 20
-long long fact[MAX_LAST+1];
+ll fact[MAX_LAST+1];
 
 void precompute_fact() {
     fact[0] = 1;
@@ -11,10 +12,10 @@ void precompute_fact() {
         fact[i] = fact[i-1] * i;
 }
 
-void kth_perm(int *arr, int len, long long k) {
+void kth_perm(int *arr, int len, ll k) {
     int used[MAX_LAST] = {0};
     for (int i = 0; i < len; i++) {
-        long long f = fact[len-i-1];
+        ll f = fact[len-i-1];
         int idx = k / f;
         k %= f;
         int cnt = 0;
@@ -33,7 +34,7 @@ void kth_perm(int *arr, int len, long long k) {
 
 int main() {
     int n;
-    long long k;
+    ll k;
     scanf("%d %lld", &n, &k);
     precompute_fact();
     if (n <= MAX_LAST) {

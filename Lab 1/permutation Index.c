@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define ll long long
 
 #define MAXN 100005
 
@@ -16,7 +17,7 @@ int sum(int x) {
     return s;
 }
 
-long long fact[MAXN];
+ll fact[MAXN];
 
 void precompute_fact(int n) {
     fact[0] = 1;
@@ -24,10 +25,10 @@ void precompute_fact(int n) {
         fact[i] = fact[i - 1] * i;
 }
 
-long long find_idx(int *arr, int n) {
+ll find_idx(int *arr, int n) {
     memset(bit, 0, sizeof(int) * (n + 2));
     precompute_fact(n);
-    long long idx = 0;
+    ll idx = 0;
     for (int i = 0; i < n; i++) {
         int less = arr[i] - 1 - sum(arr[i] - 1);
         idx += less * fact[n - i - 1];
@@ -43,7 +44,7 @@ int main() {
     for (int i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
-    long long idx = find_idx(arr, n);
+    ll idx = find_idx(arr, n);
     printf("%lld\n", idx);
     free(arr);
     return 0;
