@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define int long long
 #define REP(i, a, b) for(int i = a; i < b; i++)
 
 typedef struct Pair{
@@ -105,10 +106,10 @@ int main(){
     REP(i, 0, 100){
         REP(j, 0, 100) d[i][j] = 1e9;
     }
-    scanf("%d %d", &n, &m);
+    scanf("%lld %lld", &n, &m);
     REP(i, 0, n)
-        REP(j, 0, m) scanf("%d", &g[i][j]);
-    scanf("%d %d", &r, &c);
+        REP(j, 0, m) scanf("%lld", &g[i][j]);
+    scanf("%lld %lld", &r, &c);
 
     bfs();
     int ans = 1e9;
@@ -121,6 +122,6 @@ int main(){
         ans = min(ans, d[i][m-1]);
     }
     if(ans == 1e9) ans = -2;
-    printf("%d", ans+1);
+    printf("%lld", ans+1);
     return 0;
 }

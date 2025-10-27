@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
+#define int long long
 #define REP(i, a, b) for(int i = 0; i < b; i++)
 
 typedef struct Node{
@@ -58,11 +59,11 @@ void dfs(graph* g, int v, int p){
 
 int main(){
     int n;
-    scanf("%d", &n);
+    scanf("%lld", &n);
     graph* g = cgraph(n);
     REP(i, 1, n){
         int u, v;
-        scanf("%d %d", &u, &v);
+        scanf("%lld %lld", &u, &v);
         addEdge(g, u-1, v-1);
     }
     
@@ -79,6 +80,6 @@ int main(){
     REP(i, 0, n)
         if(g-> d[i] > dia) dia = g-> d[i];
 
-    printf("%d\n", dia+1);
+    printf("%lld\n", dia+1);
     return 0;
 }

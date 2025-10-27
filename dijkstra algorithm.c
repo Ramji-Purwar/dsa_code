@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdbool.h>
+#define int long long
 #define REP(i, a, b) for(int i = a; i < b; i++)
-#define ll long long
-const ll INF = 1e18;
+const int INF = 1e14;
 
 ////////////////////////////////////////////////////////////
 
 typedef struct Pair{
-    ll fi;
-    ll se;
+    int fi;
+    int se;
 } pair;
 
 typedef struct MinHeap{
@@ -72,7 +72,7 @@ void heapifyMinDown(minHeap* h, int idx){
     }
 }
 
-void hPush(minHeap* h, ll dist, ll vertex){
+void hPush(minHeap* h, int dist, int vertex){
     if(h->size >= h->capacity){
         resizeHeap(h);
     }
@@ -103,12 +103,12 @@ bool hEmpty(minHeap* h){
 ////////////////////////////////////////////////////////
 
 typedef struct Node{
-    ll val;
-    ll wt;
+    int val;
+    int wt;
     struct Node* next;
 } node;
 
-node* cnode(ll x, ll wt){
+node* cnode(int x, int wt){
     node* new = malloc(sizeof(node));
     new-> val = x;
     new-> wt = wt;
@@ -122,7 +122,7 @@ typedef struct Graph{
     int n;
     node** aj;
     int* vis;
-    ll* dist;
+    int* dist;
     int* p;
 } graph;
 
@@ -132,7 +132,7 @@ graph* cgraph(int n){
     g-> n = n;
     g-> aj = malloc(n * sizeof(node*));
     g-> vis = malloc(n * sizeof(int));
-    g-> dist = malloc(n * sizeof(ll));
+    g-> dist = malloc(n * sizeof(int));
     g-> p = malloc(n * sizeof(int));
     
     REP(i, 0, n){
@@ -160,7 +160,7 @@ void freeGraph(graph* g){
     free(g);
 }
 
-void addEdge(graph* g, int u, int v, ll wt){
+void addEdge(graph* g, int u, int v, int wt){
     node* new = cnode(v, wt);
     new-> next = g-> aj[u];
     g-> aj[u] = new;
@@ -180,21 +180,20 @@ void dijkstra(graph* g, int src){
 
     while(!hEmpty(pq)){
         pair cur = hPop(pq);
-        ll d = cur.fi;
-        int v = cur.se;
+        int u = cur.se;
         
-        if(g-> vis[v]) continue;
-        g-> vis[v] = 1;
+        if(g-> vis[u]) continue;
+        g-> vis[u] = 1;
         
-        node* ch = g-> aj[v];
+        node* ch = g-> aj[u];
         while(ch != NULL){
-            int el = ch-> val;
-            ll wt = ch-> wt;
+            int v = ch-> val;
+            int wt = ch-> wt;
             
-            if(!g-> vis[el] && g-> dist[v] + wt < g-> dist[el]){
-                g-> dist[el] = g-> dist[v] + wt;
-                g-> p[el] = v;
-                hPush(pq, g-> dist[el], el);
+            if(!g-> vis[v] && g-> dist[u] + wt < g-> dist[v]){
+                g-> dist[v] = g-> dist[u] + wt;
+                g-> p[v] = u;
+                hPush(pq, g-> dist[v], v);
             }
             ch = ch-> next;
         }
@@ -207,12 +206,11 @@ void dijkstra(graph* g, int src){
 
 int main(){
     int n, m;
-    scanf("%d %d", &n, &m);
+    scanf("%lld %lld", &n, &m);
     graph* g = cgraph(n);
     REP(i, 0, m){
-        int x, y;
-        ll wt;
-        scanf("%d %d %lld", &x, &y, &wt);
+        int x, y, wt;
+        scanf("%lld %lld %lld", &x, &y, &wt);
         addEdge(g, x, y, wt);
     }
 

@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define int long long
 #define REP(i, a, b) for(int i = a; i < b; i++)
 
 typedef struct Node{

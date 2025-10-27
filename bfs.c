@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define int long long
 #define REP(i, a, b) for(int i = a; i < b; i++)
 
 typedef struct Node{
@@ -101,11 +102,11 @@ void bfs(graph* g){
 
 int main(){
     int n, m;
-    scanf("%d %d", &n, &m);
+    scanf("%lld %lld", &n, &m);
     graph* g = cgraph(n);
     REP(i, 0, m){
         int u, v;
-        scanf("%d %d", &u, &v);
+        scanf("%lld %lld", &u, &v);
         addEdge(g, u, v);
     }
     bfs(g);
