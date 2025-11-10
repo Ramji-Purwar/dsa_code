@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include <stdbool.h>
 #define REP(i, a, b) for(int i = a; i < b; i++)
 
@@ -70,36 +71,6 @@ int height(node* root) {
     return (lHeight > rHeight ? lHeight : rHeight) + 1;
 }
 
-void getHeights(node* root, int* lHeight, int* rHeight) {
-    if (root->l != NULL) {
-        int ll = height(root->l->l);
-        int lr = height(root->l->r);
-        *lHeight = (ll > lr ? ll : lr) + 1;
-    } else {
-        *lHeight = -1;
-    }
-    
-    if (root->r != NULL) {
-        int rl = height(root->r->l);
-        int rr = height(root->r->r);
-        *rHeight = (rl > rr ? rl : rr) + 1;
-    } else {
-        *rHeight = -1;
-    }
-}
-
-node* unlink_node(node* n) {
-    node* replacement = NULL;
-    
-    if (n->l == NULL) {
-        replacement = n->r;
-    } else if (n->r == NULL) {
-        replacement = n->l;
-    }
-    
-    return replacement;
-}
-
 node* delete(node* root, int x) {
     if (root == NULL) {
         return NULL;
@@ -113,25 +84,21 @@ node* delete(node* root, int x) {
         root->r = delete(root->r, x);
         return root;
     }
-    
-    if (root->l == NULL || root->r == NULL) {
-        node* temp = unlink_node(root);
+
+    if (root->l == NULL) {
+        node* temp = root->r;
+        free(root);
+        return temp;
+    } 
+    else if (root->r == NULL) {
+        node* temp = root->l;
         free(root);
         return temp;
     }
-    
-    int lHeight, rHeight;
-    getHeights(root, &lHeight, &rHeight);
-    
-    if (lHeight > rHeight) {
-        node* predecessor = findMax(root->l);
-        root->val = predecessor->val;
-        root->l = delete(root->l, predecessor->val);
-    } else {
-        node* successor = findMin(root->r);
-        root->val = successor->val;
-        root->r = delete(root->r, successor->val);
-    }
+
+    node* successor = findMin(root->r);
+    root->val = successor->val;
+    root->r = delete(root->r, successor->val);
     
     return root;
 }
@@ -233,7 +200,7 @@ int main() {
     int n = 9;
     int arr[] = {5, 2, 6, 3, 8, 9, 1, 7, 4};
     
-    for(int i = 0; i < n; i++) {
+    REP(i, 0, n) {
         root = add(root, arr[i]);
     }
 
